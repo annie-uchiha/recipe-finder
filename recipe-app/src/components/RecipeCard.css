@@ -1,21 +1,21 @@
-/* src/components/RecipeCard.css */
 .recipe-card {
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 10px;
     cursor: pointer;
-    background-color: white; /* Added for contrast */
-    text-align: center; /* Center-align text and image */
+    background-color: white; 
+    color: black;
+    text-align: center; 
   }
   
   .recipe-card img {
-    width: 100%; /* Make sure the image scales with the card width */
+    width: 100%; 
     height: auto;
     border-radius: 4px;
   }
   
   .recipe-card h3 {
-    font-size: 1rem; /* Adjusted font size for better fit */
+    font-size: 1rem; 
     margin-top: 10px;
   }
   

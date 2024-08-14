@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Layout from './components/Layout';
@@ -33,22 +32,24 @@ const App = () => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          <button onClick={handleSearch}>Search</button>
+          <button onClick={handleSearch}>Mangia</button>
         </div>
       </div>
       <div className="body-content">
-        <div className="recipe-grid">
-          {recipes.length > 0 ? (
-            recipes.map((recipe, index) => (
-              <RecipeCard 
-                key={index} 
-                recipe={recipe} 
-                onClick={() => dispatch({ type: 'FETCH_RECIPE_SUCCESS', payload: recipe })}
-              />
-            ))
-          ) : (
-            <p>Loading recipes or no recipes found.</p>
-          )}
+        <div className="recipe-grid-container">
+          <div className="recipe-grid">
+            {recipes.length > 0 ? (
+              recipes.map((recipe, index) => (
+                <RecipeCard 
+                  key={index} 
+                  recipe={recipe} 
+                  onClick={() => dispatch({ type: 'FETCH_RECIPE_SUCCESS', payload: recipe })}
+                />
+              ))
+            ) : (
+              <p>Loading recipes or no recipes found.</p>
+            )}
+          </div>
         </div>
       </div>
       {selectedRecipe && (

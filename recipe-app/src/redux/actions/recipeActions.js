@@ -21,7 +21,7 @@ export const fetchRecipe = (query) => {
   return async (dispatch) => {
     try {
       const res = await axios.get(`https://api.edamam.com/search?q=${query}&app_id=${API_ID}&app_key=${API_KEY}`);
-      dispatch({ type: FETCH_RECIPE_SUCCESS, payload: res.data.hits[0] });
+      dispatch({ type: FETCH_RECIPE_SUCCESS, payload: res.data.hits });
     } catch (error) {
       console.error('Error fetching recipe:', error);
     }

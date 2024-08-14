@@ -1,5 +1,5 @@
 import React from 'react';
-import './RecipePopup.css'; 
+import './RecipePopup.css';
 
 const RecipePopup = ({ recipe, onClose }) => {
   const { label, image, ingredients, instructions } = recipe.recipe;
@@ -17,7 +17,7 @@ const RecipePopup = ({ recipe, onClose }) => {
           ))}
         </ul>
         <h3>Instructions</h3>
-        <p>{instructions || 'No instructions available'}</p>
+        <p>{instructions}</p>
         <button onClick={() => {
           const blob = new Blob([`${label}\n\nIngredients:\n${ingredients.map(ingredient => ingredient.text).join('\n')}\n\nInstructions:\n${instructions}`], { type: 'text/plain' });
           const url = URL.createObjectURL(blob);

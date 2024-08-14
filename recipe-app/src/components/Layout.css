@@ -1,0 +1,30 @@
+.layout {
+    text-align: center;
+  }
+  
+  .header {
+    background-image: url('../images/recipe-app-background.jpg');
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+  
+  .header input {
+    padding: 10px;
+    width: 300px;
+    margin-top: 20px;
+  }
+  
+  .recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    padding: 20px;
+  }
+  

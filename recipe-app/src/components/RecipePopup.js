@@ -2,14 +2,7 @@ import React from 'react';
 import './RecipePopup.css'; 
 
 const RecipePopup = ({ recipe, onClose }) => {
-
-  if (!recipe) {
-    return null; 
-  }
-
-  const recipeDetails = recipe.recipe || recipe;
-
-  const { label, image, ingredients, instructions } = recipeDetails;
+  const { label, image, ingredients, instructions } = recipe.recipe;
 
   return (
     <div className="popup-overlay">
@@ -19,18 +12,14 @@ const RecipePopup = ({ recipe, onClose }) => {
         <img src={image} alt={label} />
         <h3>Ingredients</h3>
         <ul>
-          {ingredients && ingredients.length > 0 ? (
-            ingredients.map((ingredient, index) => (
-              <li key={index}>{ingredient.text}</li>
-            ))
-          ) : (
-            <p>No ingredients available.</p>
-          )}
+          {ingredients.map((ingredient, index) => (
+            <li key={index}>{ingredient.text}</li>
+          ))}
         </ul>
         <h3>Instructions</h3>
-        <p>{instructions || "No instructions available."}</p>
+        <p>{instructions || 'No instructions available'}</p>
         <button onClick={() => {
-          const blob = new Blob([`${label}\n\nIngredients:\n${ingredients ? ingredients.map(ingredient => ingredient.text).join('\n') : 'No ingredients available.'}\n\nInstructions:\n${instructions || 'No instructions available.'}`], { type: 'text/plain' });
+          const blob = new Blob([`${label}\n\nIngredients:\n${ingredients.map(ingredient => ingredient.text).join('\n')}\n\nInstructions:\n${instructions}`], { type: 'text/plain' });
           const url = URL.createObjectURL(blob);
           const a = document.createElement('a');
           a.href = url;

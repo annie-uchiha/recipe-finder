@@ -1,65 +1,54 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Layout from './components/Layout';
-import RecipeCard from './components/RecipeCard';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { searchRecipes } from './redux/recipeSlice';
 import RecipePopup from './components/RecipePopup';
-import { fetchRandomRecipes, fetchRecipe } from './redux/actions/recipeActions';
+import RecipeCard from './components/RecipeCard';
+import './App.css'; 
 
-const App = () => {
+function App() {
+  const [searchTerm, setSearchTerm] = useState('');
   const dispatch = useDispatch();
-  const recipes = useSelector(state => state.recipe.recipes);
-  const selectedRecipe = useSelector(state => state.recipe.selectedRecipe);
-  const [query, setQuery] = useState('');
-
-  useEffect(() => {
-    dispatch(fetchRandomRecipes());
-  }, [dispatch]);
+  const searchResults = useSelector((state) => state.recipes.searchResults);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   const handleSearch = () => {
-    if (query.trim()) {
-      dispatch(fetchRecipe(query));
-    }
+    dispatch(searchRecipes(searchTerm));
+  };
+
+  const handleRecipeClick = (recipe) => {
+    setSelectedRecipe(recipe);
+  };
+
+  const handleClosePopup = () => {
+    setSelectedRecipe(null);
   };
 
   return (
-    <Layout>
-      <div className="header">
+    <div className="layout">
+      <header className="header">
         <h1>Recipe Finder</h1>
         <div className="search-bar">
           <input
             type="text"
-            placeholder="Search for a recipe..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search for recipes..."
           />
-          <button onClick={handleSearch}>Mangia</button>
+          <button onClick={handleSearch}>Search</button>
         </div>
-      </div>
-      <div className="body-content">
-        <div className="recipe-grid-container">
-          <div className="recipe-grid">
-            {recipes.length > 0 ? (
-              recipes.map((recipe, index) => (
-                <RecipeCard 
-                  key={index} 
-                  recipe={recipe} 
-                  onClick={() => dispatch({ type: 'FETCH_RECIPE_SUCCESS', payload: recipe })}
-                />
-              ))
-            ) : (
-              <p>Loading recipes or no recipes found.</p>
-            )}
-          </div>
+      </header>
+      <main className="body-content">
+        <div className="recipe-grid">
+          {searchResults.map((recipe, index) => (
+            <RecipeCard key={index} recipe={recipe} onClick={handleRecipeClick} />
+          ))}
         </div>
-      </div>
+      </main>
       {selectedRecipe && (
-        <RecipePopup 
-          recipe={selectedRecipe} 
-          onClose={() => dispatch({ type: 'FETCH_RECIPE_SUCCESS', payload: null })} 
-        />
+        <RecipePopup recipe={selectedRecipe} onClose={handleClosePopup} />
       )}
-    </Layout>
+    </div>
   );
-};
+}
 
 export default App;

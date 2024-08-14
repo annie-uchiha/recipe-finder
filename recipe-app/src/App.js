@@ -26,7 +26,7 @@ function App() {
   return (
     <div className="layout">
       <header className="header">
-        <h1>Recipe Finder</h1>
+        <h1>Mangia Tutto</h1>
         <div className="search-bar">
           <input
             type="text"
@@ -34,7 +34,7 @@ function App() {
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search for recipes..."
           />
-          <button onClick={handleSearch}>Search</button>
+          <button onClick={handleSearch}>Mangia</button>
         </div>
       </header>
       <main className="body-content">
